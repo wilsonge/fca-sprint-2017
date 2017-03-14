@@ -20,11 +20,9 @@ class TransactionsController extends Controller
       $client = new Client();
       // json parse $response
       // put it in $batched_transactions!
-
-
       $res = $client->request('GET', url('/') . '/api/transactions');
-      
-      $batched_transactions = json_decode($res->getBody());
+
+      $batched_transactions = json_decode($res->getBody(), true);
 
 	    return view('welcome', ['batched_transactions' => $batched_transactions]);
     }
