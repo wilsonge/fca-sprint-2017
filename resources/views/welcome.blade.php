@@ -87,25 +87,7 @@
             </div>
             <br />
             <p class="text-center">¯\_(ツ)_/¯</p>
-
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <img src="https://maps.googleapis.com/maps/api/staticmap?center=51.518958004956936,-0.07732272148132324&zoom=18&size=600x400&maptype=roadmap&markers=51.518958004956936,-0.07732272148132324&key=AIzaSyCUyBouO49GjpyX_gDI8FyZma6qA33f7qU" alt="" />
-                        </div>
-                        <div class="modal-body text-center">
-                            <img src="http://avatars.io/twitter/chilango_uk/?size=large" />
-                            <h3>&pound;1.50</h3>
-                            <h1>Chilango</h1>
-                            <p>32 Brushfield St, London E1 6AT</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-        <script src=app/app.js></script>
+        <script src=js/app.js></script>
     </body>
 </html>
