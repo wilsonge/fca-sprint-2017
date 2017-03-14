@@ -45,7 +45,7 @@
                     @foreach($batch['transactions'] as $transaction)
                         <a href="#" class="list-group-item">
                         <!-- logo -->
-                        @if (isset($transaction['merchant']['logo']))
+                        @if ($transaction['merchant']['logo'])
                         <img src="{{ $transaction['merchant']['logo'] }}" />
                         @else
                         @if ($transaction['description'] == 'Top up')
@@ -63,7 +63,7 @@
                         </span>
                         @else
                         <span class="pull-right">
-                            <h4>&pound;{{ $transaction['amount'] }}</small></h4>
+                            <h4>&pound;{{ $transaction['amount'] }}</h4>
                         </span>
                         @endif
                         @endif
