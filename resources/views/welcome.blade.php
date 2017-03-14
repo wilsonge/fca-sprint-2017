@@ -1,95 +1,111 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html>
     <head>
+
+        <title>Mondo</title>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="shortcut icon" sizes="196x196" href="static/favicon.png">
 
-        <title>Laravel</title>
+        <!-- css -->
+        <link rel="stylesheet" href="css/app.css">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
+        <div class="container">
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+            <!-- header -->
+            <div class="row header">
+                <div class="col-xs-6">
+                    <div class="header-tab">
+                        <h4>Your Card</h4>
+                    </div>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="col-xs-6">
+                    <div class="header-tab">
+                        <h4>Daily Budget</h4>
+                    </div>
                 </div>
             </div>
+
+            <!-- transactions -->
+            <div class="row">
+                @foreach ($batched_transactions as $batch)
+                <div class="list-group">
+                    <a href="#" class="list-group-item disabled">
+                        <span>{{ batch.date }}</span>
+                        <span class="pull-right">Total: &pound;{{ batch.total_spent }}</span>
+                    </a>
+                    @foreach($batch.transactions as $transaction)
+                    @if (transaction.merchant.address)
+                        <a href="#" class="list-group-item">
+                    @else
+                        <a href="#" class="list-group-item">
+                    @endif
+
+                        <!-- logo -->
+                        @if (transaction.merchant.logo)
+                        <img src="{{ transaction.merchant.logo }}" />
+                        @else
+                        @if (transaction.description == 'Top up')
+                        <img src="static/mondopurchase.png" />
+                        @else
+                        <img src="static/nomerchant.png" />
+                        @endif
+                        @endif
+
+                        <!-- amount -->
+                        @if (transaction.decline_reason != 'INSUFFICIENT_FUNDS')
+                        @if (strpos(transaction.amount, '-'))
+                        <span class="pull-right text-success">
+                            <h4>&#43;&pound;{{ transaction.amount.replace('-','') }}</h4>
+                        </span>
+                        @else
+                        <span class="pull-right">
+                            <h4>&pound;{{ transaction.amount.split(".")[0] }}<small>&#46;{{ transaction.amount.split(".")[1] }}</small></h4>
+                        </span>
+                        @endif
+                        @endif
+
+                        <!-- merchant -->
+                        @if (transaction.merchant.name)
+                        <span>{{ transaction.merchant.name }}</span>
+                        @else
+                        <span>{{ transaction.description }}</span>
+                        @endif
+
+                        <!-- decline_reason -->
+                        @if (transaction.decline_reason == 'INSUFFICIENT_FUNDS')
+                        <br />
+                        <small class="text-danger">Declined, you didn't have &pound;{{ transaction.amount }}</small>
+                        @endif
+                        </a>
+                    @endforeach
+                </div>
+                @endforeach
+            </div>
+            <br />
+            <p class="text-center">¯\_(ツ)_/¯</p>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <img src="https://maps.googleapis.com/maps/api/staticmap?center=51.518958004956936,-0.07732272148132324&zoom=18&size=600x400&maptype=roadmap&markers=51.518958004956936,-0.07732272148132324&key=AIzaSyCUyBouO49GjpyX_gDI8FyZma6qA33f7qU" alt="" />
+                        </div>
+                        <div class="modal-body text-center">
+                            <img src="http://avatars.io/twitter/chilango_uk/?size=large" />
+                            <h3>&pound;1.50</h3>
+                            <h1>Chilango</h1>
+                            <p>32 Brushfield St, London E1 6AT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+        <script src=app/app.js></script>
     </body>
 </html>
