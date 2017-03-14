@@ -87,8 +87,7 @@
             </div>
             <br />
             <p class="text-center">¯\_(ツ)_/¯</p>
-
         </div>
-        <script src=app/app.js></script>
+        <script src=js/app.js></script>
     </body>
 </html>
