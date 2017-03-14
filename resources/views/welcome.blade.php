@@ -31,24 +31,24 @@
 
             <!-- transactions -->
             <div class="row">
+                <!--
+                Batched transactions is a list of all transactions
+                GROUPED BY DATE
+                Within each batch there is a date, and a list of transactions
+               -->
                 @foreach ($batched_transactions as $batch)
                 <div class="list-group">
                     <a href="#" class="list-group-item disabled">
-                        <span>{{ batch.date }}</span>
-                        <span class="pull-right">Total: &pound;{{ batch.total_spent }}</span>
+                        <span>{{ $batch['date'] }}</span>
+                        <span class="pull-right">Total: &pound;{{ $batch['total_spent'] }}</span>
                     </a>
-                    @foreach($batch.transactions as $transaction)
-                    @if (transaction.merchant.address)
+                    @foreach($batch['transactions'] as $transaction)
                         <a href="#" class="list-group-item">
-                    @else
-                        <a href="#" class="list-group-item">
-                    @endif
-
                         <!-- logo -->
-                        @if (transaction.merchant.logo)
-                        <img src="{{ transaction.merchant.logo }}" />
+                        @if (isset($transaction['merchant']['logo']))
+                        <img src="{{ $transaction['merchant']['logo'] }}" />
                         @else
-                        @if (transaction.description == 'Top up')
+                        @if ($transaction['description'] == 'Top up')
                         <img src="static/mondopurchase.png" />
                         @else
                         <img src="static/nomerchant.png" />
@@ -56,29 +56,29 @@
                         @endif
 
                         <!-- amount -->
-                        @if (transaction.decline_reason != 'INSUFFICIENT_FUNDS')
-                        @if (strpos(transaction.amount, '-'))
+                        @if ($transaction['decline_reason'] != 'INSUFFICIENT_FUNDS')
+                        @if (strpos($transaction['amount'], '-'))
                         <span class="pull-right text-success">
-                            <h4>&#43;&pound;{{ transaction.amount.replace('-','') }}</h4>
+                            <h4>&#43;&pound;{{ $transaction['amount'].replace('-','') }}</h4>
                         </span>
                         @else
                         <span class="pull-right">
-                            <h4>&pound;{{ transaction.amount.split(".")[0] }}<small>&#46;{{ transaction.amount.split(".")[1] }}</small></h4>
+                            <h4>&pound;{{ $transaction['amount'] }}</small></h4>
                         </span>
                         @endif
                         @endif
 
                         <!-- merchant -->
-                        @if (transaction.merchant.name)
-                        <span>{{ transaction.merchant.name }}</span>
+                        @if ($transaction['merchant']['name'])
+                        <span>{{ $transaction['merchant']['name'] }}</span>
                         @else
-                        <span>{{ transaction.description }}</span>
+                        <span>{{ $transaction['description'] }}</span>
                         @endif
 
                         <!-- decline_reason -->
-                        @if (transaction.decline_reason == 'INSUFFICIENT_FUNDS')
+                        @if ($transaction['decline_reason'] == 'INSUFFICIENT_FUNDS')
                         <br />
-                        <small class="text-danger">Declined, you didn't have &pound;{{ transaction.amount }}</small>
+                        <small class="text-danger">Declined, you didn't have &pound;{{ $transaction['amount'] }}</small>
                         @endif
                         </a>
                     @endforeach
