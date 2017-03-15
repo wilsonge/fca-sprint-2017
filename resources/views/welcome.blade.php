@@ -32,30 +32,21 @@
 
                         <a href="#" class="list-group-item">
 
-                          <!-- LOGO -->
-                          @if ($transaction['merchant']['logo'])
-                          <img src="{{ $transaction['merchant']['logo'] }}" />
-                          @endif
+                          <!-- logo -->
+                          <img src="https://pbs.twimg.com/profile_images/808367469639278592/SE68XiDa.jpg" />
 
                           <!-- amount -->
-                          @if ($transaction['decline_reason'] != 'INSUFFICIENT_FUNDS')
-                          @if (strpos($transaction['amount'], '-'))
-                          <span class="pull-right text-success">
-                              <h4>&#43;&pound;{{ $transaction['amount'].replace('-','') }}</h4>
-                          </span>
-                          @else
                           <span class="pull-right">
-                              <h4>&pound;{{ $transaction['amount'] }} Date</h4>
+                              <h4>&pound;{{ $transaction['amount'] }} {{ $transaction['created'] }}</h4>
                           </span>
-                          @endif
-                          @endif
 
-                          <!-- merchant -->
-                          @if ($transaction['merchant']['name'])
-                          <span>{{ $transaction['merchant']['name'] }}</span>
-                          @else
-                          <span>{{ $transaction['description'] }}</span>
-                          @endif
+                          <!-- name -->
+                          <span>{{ $transaction['name'] }}</span>
+                          <!-- category -->
+                          <span>{{ $transaction['category'] }}</span>
+
+
+
 
                         </a>
                 </div>
