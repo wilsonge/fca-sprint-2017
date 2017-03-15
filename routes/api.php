@@ -43,4 +43,4 @@ Route::get('/transactions', function () {
       ),
     );
     return json_encode($batched_transactions);
-});
+})->name('tranactions_date_api');
