@@ -1,4 +1,6 @@
-This brief example was developed for the purpose of the FCA Tech Sprint 2017
+This brief example was developed for the purpose of the FCA Tech Sprint 2017, using laravel
+as it gave an easy prototype with ready compiled bootstrap. The design elements have been
+adapted from https://github.com/Manoj-nathwani/my-mondo (which contains unlicensed code) 
 
 ## How to use
 1. Clone repository
