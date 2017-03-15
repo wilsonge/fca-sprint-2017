@@ -37,17 +37,11 @@
 
                           <!-- amount -->
                           <span class="pull-right">
-                              <h4>&pound;{{ $transaction['amount'] }} {{ $transaction['created'] }}</h4>
+                              <h4>&pound;{{ $transaction['amount'] }} <br />{{ $transaction['created'] }}</h4>
                           </span>
 
                           <!-- name -->
-                          <span>{{ $transaction['name'] }}</span>
-                          <!-- category -->
-                          <span>{{ $transaction['category'] }}</span>
-
-
-
-
+                          <span><strong>{{ $transaction['name'] }}</strong> <br /> {{ $transaction['category'] }}</span>
                         </a>
                 </div>
                 @endforeach
