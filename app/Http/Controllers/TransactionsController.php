@@ -20,6 +20,6 @@ class TransactionsController extends Controller
 		// put it in $batched_transactions!
 		$res = $client->request('GET', route('tranactions_date_api'));
 		$batched_transactions = json_decode($res->getBody(), true);
-		return view('welcome', ['batched_transactions' => $batched_transactions]);
+		return view('welcome', ['batched_transactions' => $batched_transactions, 'committed' => 1023]);
     }
 }

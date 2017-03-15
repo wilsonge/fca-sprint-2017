@@ -50,6 +50,9 @@
                 </div>
                 @endforeach
             </div>
+
+            <p class="text-center">There are &pound;{{ number_format($committed) }} payments.<br>You can settle these immediately so you'll<br>know exactly how much is left to spend</p>
+            <a href="{{ url('/month_total') }}" class="center-block btn btn-primary">Hide Recurring payments</a>
         </div>
         <script src=js/app.js></script>
     </body>
