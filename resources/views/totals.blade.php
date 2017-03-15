@@ -25,7 +25,7 @@
                         <p>left of disposable income</p>
                     </div>
                     <div>
-                        <p>Do you want to create money <br> jars to budget &pound;{{$jar_amount}} per week?</p>
+                        <p style="width:100%!important">Do you want to create money <br> jars to budget &pound;{{$jar_amount}} per week?</p>
                     </div>
                     <button class="btn btn-primary">
                         Set budget

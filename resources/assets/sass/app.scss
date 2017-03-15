@@ -24,6 +24,7 @@ body, .header{
   height: 100%;
   width: 100%;
   margin: 5px 0 5px 0;
+  text-align: center;
   padding: 5px 10px 5px 10px;
   background-color: #454F67;
   color: white;
@@ -31,6 +32,9 @@ body, .header{
 }
 .header-tab h1 {
   font-size: 28px;
+}
+.header-tab h2 {
+  font-size: 98px;
 }
 .header-tab h1 small{
   color: white;
