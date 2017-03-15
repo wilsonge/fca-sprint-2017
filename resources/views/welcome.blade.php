@@ -33,7 +33,7 @@
                         <a href="#" class="list-group-item">
 
                           <!-- logo -->
-                          <img src="" />
+                          <img src="https://pbs.twimg.com/profile_images/808367469639278592/SE68XiDa.jpg" />
 
                           <!-- amount -->
                           <span class="pull-right">
