@@ -13,13 +13,16 @@ class TransactionsController extends Controller
      */
     public function show()
     {
-		// Call it
-		$client = new Client();
-
-		// json parse $response
-		// put it in $batched_transactions!
+		$client = new Client;
 		$res = $client->request('GET', route('tranactions_date_api'));
-		$batched_transactions = json_decode($res->getBody(), true);
-		return view('welcome', ['batched_transactions' => $batched_transactions, 'committed' => 1023]);
+		$transactionsGroups = json_decode($res->getBody(), true);
+		$count = 0;
+
+		foreach ($transactionsGroups['essential'] as $transaction)
+		{
+			$count += $transaction['amount'];
+		}
+
+		return view('welcome', ['batched_transactions' => $transactionsGroups, 'committed' => $count]);
     }
 }
