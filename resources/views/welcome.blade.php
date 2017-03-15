@@ -28,11 +28,11 @@
             <!-- transactions -->
             <div class="row">
               @php
-              dd($batched_transactions);
+              dd($batched_transactions['essential']);
               @endphp
-                @foreach ($batched_transactions as $batch)
+                @foreach ($batched_transactions['essential'] as $batch)
                 <div class="list-group">
-                    @foreach($batch['transactions'] as $transaction)
+
                         <a href="#" class="list-group-item">
 
                           <!-- LOGO -->
@@ -61,7 +61,7 @@
                           @endif
 
                         </a>
-                    @endforeach
+
                 </div>
                 @endforeach
             </div>
