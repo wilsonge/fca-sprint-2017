@@ -2,7 +2,7 @@
 <html>
     <head>
 
-        <title>Mondo</title>
+        <title>FCA Tech Sprint Demo</title>
         <meta charset="utf-8">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -17,76 +17,54 @@
 
             <!-- header -->
             <div class="row header">
-                <div class="col-xs-6">
+                <div class="col-xs-12">
                     <div class="header-tab">
-                        <h4>Your Card</h4>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="header-tab">
-                        <h4>Daily Budget</h4>
+                        <h3>Plan this month</h3>
+                        <p>We've found these regular payments coming up this month:</p>
                     </div>
                 </div>
             </div>
 
             <!-- transactions -->
             <div class="row">
-                <!--
-                Batched transactions is a list of all transactions
-                GROUPED BY DATE
-                Within each batch there is a date, and a list of transactions
-               -->
+              @php
+              dd($batched_transactions);
+              @endphp
                 @foreach ($batched_transactions as $batch)
                 <div class="list-group">
-                    <a href="#" class="list-group-item disabled">
-                        <span>{{ $batch['date'] }}</span>
-                        <span class="pull-right">Total: &pound;{{ $batch['total_spent'] }}</span>
-                    </a>
                     @foreach($batch['transactions'] as $transaction)
                         <a href="#" class="list-group-item">
-                        <!-- logo -->
-                        @if ($transaction['merchant']['logo'])
-                        <img src="{{ $transaction['merchant']['logo'] }}" />
-                        @else
-                        @if ($transaction['description'] == 'Top up')
-                        <img src="static/mondopurchase.png" />
-                        @else
-                        <img src="static/nomerchant.png" />
-                        @endif
-                        @endif
 
-                        <!-- amount -->
-                        @if ($transaction['decline_reason'] != 'INSUFFICIENT_FUNDS')
-                        @if (strpos($transaction['amount'], '-'))
-                        <span class="pull-right text-success">
-                            <h4>&#43;&pound;{{ $transaction['amount'].replace('-','') }}</h4>
-                        </span>
-                        @else
-                        <span class="pull-right">
-                            <h4>&pound;{{ $transaction['amount'] }}</h4>
-                        </span>
-                        @endif
-                        @endif
+                          <!-- LOGO -->
+                          @if ($transaction['merchant']['logo'])
+                          <img src="{{ $transaction['merchant']['logo'] }}" />
+                          @endif
 
-                        <!-- merchant -->
-                        @if ($transaction['merchant']['name'])
-                        <span>{{ $transaction['merchant']['name'] }}</span>
-                        @else
-                        <span>{{ $transaction['description'] }}</span>
-                        @endif
+                          <!-- amount -->
+                          @if ($transaction['decline_reason'] != 'INSUFFICIENT_FUNDS')
+                          @if (strpos($transaction['amount'], '-'))
+                          <span class="pull-right text-success">
+                              <h4>&#43;&pound;{{ $transaction['amount'].replace('-','') }}</h4>
+                          </span>
+                          @else
+                          <span class="pull-right">
+                              <h4>&pound;{{ $transaction['amount'] }} Date</h4>
+                          </span>
+                          @endif
+                          @endif
 
-                        <!-- decline_reason -->
-                        @if ($transaction['decline_reason'] == 'INSUFFICIENT_FUNDS')
-                        <br />
-                        <small class="text-danger">Declined, you didn't have &pound;{{ $transaction['amount'] }}</small>
-                        @endif
+                          <!-- merchant -->
+                          @if ($transaction['merchant']['name'])
+                          <span>{{ $transaction['merchant']['name'] }}</span>
+                          @else
+                          <span>{{ $transaction['description'] }}</span>
+                          @endif
+
                         </a>
                     @endforeach
                 </div>
                 @endforeach
             </div>
-            <br />
-            <p class="text-center">¯\_(ツ)_/¯</p>
         </div>
         <script src=js/app.js></script>
     </body>
