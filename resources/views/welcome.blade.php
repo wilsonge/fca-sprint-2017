@@ -36,7 +36,7 @@
                           @if (array_key_exists('logo', $transaction))
                             <img src="{{$transaction['logo']}}" />
                           @else
-                            <img src="https://pbs.twimg.com/profile_images/808367469639278592/SE68XiDa.jpg" />
+                            <img src="/monzo-png.png" />
                           @endif
 
                           <!-- amount -->
