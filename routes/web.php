@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'TransactionsController@show');
+Route::get('/month_total', 'AmountController@show');

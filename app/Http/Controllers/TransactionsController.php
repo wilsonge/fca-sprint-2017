@@ -11,9 +11,6 @@ class TransactionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
-
     public function show()
     {
 		// Call it
