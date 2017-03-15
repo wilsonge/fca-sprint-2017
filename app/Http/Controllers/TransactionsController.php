@@ -16,14 +16,13 @@ class TransactionsController extends Controller
 
     public function show()
     {
-      // call it
-      $client = new Client();
-      // json parse $response
-      // put it in $batched_transactions!
-      $res = $client->request('GET', route('tranactions_date_api'));
+		// Call it
+		$client = new Client();
 
-      $batched_transactions = json_decode($res->getBody(), true);
-
-	    return view('welcome', ['batched_transactions' => $batched_transactions]);
+		// json parse $response
+		// put it in $batched_transactions!
+		$res = $client->request('GET', route('tranactions_date_api'));
+		$batched_transactions = json_decode($res->getBody(), true);
+		return view('welcome', ['batched_transactions' => $batched_transactions]);
     }
 }
